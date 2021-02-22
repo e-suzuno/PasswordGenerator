@@ -8,7 +8,6 @@ namespace PasswordGenerator.Domain.ValueObjects
 {
     public abstract class ValueObject<T> where T : ValueObject<T>
     {
-
         public override bool Equals(object obj)
         {
             var vo = obj as T;
@@ -21,7 +20,6 @@ namespace PasswordGenerator.Domain.ValueObjects
         }
 
 
-
         /// <summary>
         /// 　指定したオブジェクトが等しいか判断します
         /// </summary>
@@ -29,6 +27,16 @@ namespace PasswordGenerator.Domain.ValueObjects
         /// <returns></returns>
         protected abstract bool EqualsCore(T other);
 
+
+        public static bool operator ==(ValueObject<T> vo1, ValueObject<T> vo2)
+        {
+            return Equals(vo1, vo2);
+        }
+
+        public static bool operator !=(ValueObject<T> vo1, ValueObject<T> vo2)
+        {
+            return !Equals(vo1, vo2);
+        }
 
 
         public override string ToString()
@@ -40,6 +48,5 @@ namespace PasswordGenerator.Domain.ValueObjects
         {
             return base.GetHashCode();
         }
-
     }
 }

@@ -8,8 +8,12 @@ namespace PasswordGenerator.Domain.ValueObjects
 {
     public class PasswordType : ValueObject<PasswordType>
     {
-        public const int Alphabet = 1;
-        public const int Number = 2;
+        public const int AlphabetValue = 1;
+        public const int NumberValue = 2;
+
+
+        public static PasswordType Alphabet = new PasswordType(AlphabetValue);
+        public static PasswordType Number = new PasswordType(NumberValue);
 
 
         public int Value { get; }
@@ -20,13 +24,21 @@ namespace PasswordGenerator.Domain.ValueObjects
             Value = value;
         }
 
-        
-
-
         protected override bool EqualsCore(PasswordType other)
         {
             return Value == other.Value;
         }
+
+
+
+        public static IList<PasswordType> ToList()
+        {
+            return new List<PasswordType> {
+                Alphabet,
+                Number
+            };
+        }
+
 
     }
 }
