@@ -7,22 +7,47 @@ using PasswordGenerator.Domain.ValueObjects;
 
 namespace PasswordGenerator.Forms.ViewModels
 {
-    public class PasswordGeneratorViewModel
+    public class PasswordGeneratorViewModel : ViewModelBase
     {
-        public bool length8Checked { get; set; } = true;
-        public bool length10Checked { get; set; } = false;
-        public bool length12Checked { get; set; } = false;
+        private bool _AlphabetCheck;
 
-        public bool AlphabetCheck { get; set; } = true;
-        public bool NumberCheck { get; set; } = false;
-
-
-        public string PasswordText { get; set; }
-        public int PasswordLength { get; set; }
-
-        public string Create()
+        public bool AlphabetCheck
         {
-            List<int> PasswordTypes = new List<int>();
+            get => _AlphabetCheck;
+            set => SetProperty(ref _AlphabetCheck, value);
+        }
+
+
+        private bool _NumberCheck;
+
+        public bool NumberCheck
+        {
+            get => _NumberCheck;
+            set => SetProperty(ref _NumberCheck, value);
+        }
+
+
+        private int _PasswordLength;
+
+        public int PasswordLength
+        {
+            get => _PasswordLength;
+            set => SetProperty(ref _PasswordLength, value);
+        }
+
+
+        private string _PasswordText = String.Empty;
+
+        public string PasswordText
+        {
+            get => _PasswordText;
+            set => SetProperty(ref _PasswordText, value);
+        }
+
+
+        public void Create()
+        {
+            List<PasswordType> PasswordTypes = new List<PasswordType>();
 
             if (AlphabetCheck)
             {
@@ -40,8 +65,7 @@ namespace PasswordGenerator.Forms.ViewModels
                 throw new InputException("パスワードタイプが選択されていません");
             }
 
-
-            return PasswordGeneratorHelper.Create(PasswordLength, PasswordTypes.ToArray());
+            PasswordText = PasswordGeneratorHelper.Create(PasswordLength, PasswordTypes.ToArray());
         }
     }
 }

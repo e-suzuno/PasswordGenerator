@@ -36,8 +36,9 @@ namespace PasswordGenerator.Forms.Views
             this.numberCheckBox.DataBindings.Add(new Binding
                 (nameof(numberCheckBox.Checked), _viewModel, nameof(_viewModel.NumberCheck)));
 
-            this.PasswordLabel.Text = "";
 
+            this.PasswordLabel.DataBindings.Add(new Binding
+                (nameof(PasswordLabel.Text), _viewModel, nameof(_viewModel.PasswordText)));
         }
 
 
@@ -62,7 +63,7 @@ namespace PasswordGenerator.Forms.Views
         {
             try
             {
-                PasswordLabel.Text = _viewModel.Create();
+                _viewModel.Create();
             }
             catch (Exception ex)
             {

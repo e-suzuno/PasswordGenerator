@@ -16,7 +16,7 @@ namespace PasswordGenerator.Tests
         {
 
 
-            int[] types = new []{
+            PasswordType[] types = new []{
                 PasswordType.Alphabet,
                 PasswordType.Number
             };
@@ -24,7 +24,7 @@ namespace PasswordGenerator.Tests
             var hasAlphabet = new Regex(@"[A-Za-z]+");
             Assert.IsTrue(hasAlphabet.IsMatch(password));
 
-            int[] types2 = new[]{
+            PasswordType[] types2 = new[]{
                 PasswordType.Number
             };
             string password2 = PasswordGeneratorHelper.Create(10, types2);
@@ -38,7 +38,7 @@ namespace PasswordGenerator.Tests
         {
 
 
-            int[] types = new[]{
+            PasswordType[] types = new[]{
                 PasswordType.Alphabet,
                 PasswordType.Number
             };
@@ -51,7 +51,7 @@ namespace PasswordGenerator.Tests
 
 
 
-            int[] types2 = new[]{
+            PasswordType[] types2 = new[]{
                 PasswordType.Alphabet
             };
             string password2 = PasswordGeneratorHelper.Create(10, types2);
@@ -67,7 +67,7 @@ namespace PasswordGenerator.Tests
         {
 
 
-            int[] types = new[]{
+            PasswordType[] types = new[]{
                 PasswordType.Alphabet,
                 PasswordType.Number
             };
@@ -87,7 +87,7 @@ namespace PasswordGenerator.Tests
         public void _８文字のPassword生成()
         {
 
-            int[] types = new[]{
+            PasswordType[] types = new[]{
                 PasswordType.Alphabet,
                 PasswordType.Number
             };
@@ -100,7 +100,7 @@ namespace PasswordGenerator.Tests
         public void _１０文字のPassword生成()
         {
 
-            int[] types = new[]{
+            PasswordType[] types = new[]{
                 PasswordType.Alphabet,
                 PasswordType.Number
             };
@@ -112,7 +112,7 @@ namespace PasswordGenerator.Tests
         public void _１２文字のPassword生成()
         {
 
-            int[] types = new[]{
+            PasswordType[] types = new[]{
                 PasswordType.Alphabet,
                 PasswordType.Number
             };

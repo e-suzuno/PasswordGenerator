@@ -22,22 +22,24 @@ namespace PasswordGenerator.Tests
             _viewModel.PasswordLength = 10;
 
             // パスワード生成を押す
-            string PasswordText = _viewModel.Create();
+            _viewModel.Create();
+            
+
+            Assert.AreEqual(10, _viewModel.PasswordText.Length);
 
 
-            Assert.AreEqual(10, PasswordText.Length);
-
-
+            var _viewModel2 = new PasswordGeneratorViewModel();
             // パスワードの種類を選ぶ
-            _viewModel.AlphabetCheck = true;
-            _viewModel.NumberCheck = true;
+            _viewModel2.AlphabetCheck = true;
+            _viewModel2.NumberCheck = true;
 
             // パスワードの文字数を選ぶ
-            _viewModel.PasswordLength = 8;
+            _viewModel2.PasswordLength = 8;
 
             // パスワード生成を押す
-            string PasswordTex2t = _viewModel.Create();
-            Assert.AreEqual(8, PasswordTex2t.Length);
+            _viewModel2.Create();
+            Assert.AreEqual(8, _viewModel2.PasswordText.Length);
+
         }
 
 

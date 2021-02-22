@@ -3,15 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using PasswordGenerator.Domain.ValueObjects;
 
 namespace PasswordGenerator.Domain.Helpers
 {
     public class PasswordGeneratorHelper
     {
-
-
-
         static Random random = new Random();
+
+
 
 
         /// <summary>
@@ -20,11 +20,9 @@ namespace PasswordGenerator.Domain.Helpers
         /// <param name="length"></param>
         /// <param name="types"></param>
         /// <returns></returns>
-        public static string Create(int length, int[] types)
+        public static string Create(int length, PasswordType[] types)
         {
-
-
-            var useTypes = new int[length];
+            var useTypes = new PasswordType[length];
             var useTypesLength = types.Length;
 
 
@@ -42,10 +40,9 @@ namespace PasswordGenerator.Domain.Helpers
             List<char> chars = new List<char>();
 
 
-            foreach (int useType in useTypes)
+            foreach (PasswordType useType in useTypes)
             {
-
-                chars.Add(getAllowedChar( useType ));
+                chars.Add(getAllowedChar(useType));
             }
 
 
@@ -56,23 +53,22 @@ namespace PasswordGenerator.Domain.Helpers
         }
 
 
-
-
-        public static char getAllowedChar(int type)
+        public static char getAllowedChar(PasswordType type)
         {
-            if (type == 1)
+            
+            switch (type.Value)
             {
-                return AlphabetRandom();
-
+                case PasswordType.AlphabetValue:
+                    return AlphabetRandom();
+                case PasswordType.NumberValue:
+                    return NumberRandom();
+                default:
+                    throw new ArgumentException(String.Format("{0} is not an even number", type.Value),
+                        nameof(type));
             }
-            else if (type == 2)
-            {
 
-                return NumberRandom();
-            }
-            return ' ';
+
         }
-
 
 
         /// <summary>
@@ -95,6 +91,7 @@ namespace PasswordGenerator.Domain.Helpers
             string chars = "1234567890";
             return GetRandomChar(chars);
         }
+        
 
 
         public static char GetRandomChar(string chars)
@@ -102,7 +99,5 @@ namespace PasswordGenerator.Domain.Helpers
             int num = random.Next(0, chars.Length - 1);
             return chars[num];
         }
-
-
     }
 }
