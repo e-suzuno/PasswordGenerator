@@ -106,6 +106,7 @@ namespace PasswordGenerator.Forms.Views
             // PasswordLabel
             // 
             this.PasswordLabel.AutoSize = true;
+            this.PasswordLabel.Cursor = System.Windows.Forms.Cursors.Hand;
             this.PasswordLabel.Location = new System.Drawing.Point(12, 141);
             this.PasswordLabel.Name = "PasswordLabel";
             this.PasswordLabel.Size = new System.Drawing.Size(26, 12);

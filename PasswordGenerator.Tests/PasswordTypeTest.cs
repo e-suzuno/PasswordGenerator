@@ -15,6 +15,8 @@ namespace PasswordGenerator.Tests
             Assert.IsTrue(new PasswordType(PasswordType.NumberValue) == PasswordType.Number);
 
         }
+
+        [TestMethod]
         public void 不一致チェック()
         {
 

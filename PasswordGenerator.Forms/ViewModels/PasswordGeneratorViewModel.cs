@@ -27,7 +27,7 @@ namespace PasswordGenerator.Forms.ViewModels
         }
 
 
-        private int _PasswordLength;
+        private int _PasswordLength = 0;
 
         public int PasswordLength
         {
@@ -60,6 +60,11 @@ namespace PasswordGenerator.Forms.ViewModels
             }
 
 
+
+            if (PasswordLength == 0)
+            {
+                throw new InputException("パスワードの長さが選択されていません");
+            }
             if (PasswordTypes.Count < 1)
             {
                 throw new InputException("パスワードタイプが選択されていません");

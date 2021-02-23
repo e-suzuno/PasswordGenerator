@@ -39,7 +39,22 @@ namespace PasswordGenerator.Forms.Views
 
             this.PasswordLabel.DataBindings.Add(new Binding
                 (nameof(PasswordLabel.Text), _viewModel, nameof(_viewModel.PasswordText)));
+
+
+
+            this.PasswordLabel.Click += new EventHandler(PasswordLabelClick);
+
         }
+
+
+
+        private void PasswordLabelClick(object sender, EventArgs e)
+        {
+
+            MessageBox.Show("クリップボードにコピーしました。");
+            Clipboard.SetText(this.PasswordLabel.Text);
+        }
+
 
 
         private void radioButton_CheckedChanged(object sender, EventArgs e)
