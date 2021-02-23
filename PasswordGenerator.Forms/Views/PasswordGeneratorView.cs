@@ -1,13 +1,8 @@
 ﻿using PasswordGenerator.Forms.ViewModels;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Runtime.InteropServices;
 using System.Windows.Forms;
+
 
 namespace PasswordGenerator.Forms.Views
 {
@@ -41,20 +36,29 @@ namespace PasswordGenerator.Forms.Views
                 (nameof(PasswordLabel.Text), _viewModel, nameof(_viewModel.PasswordText)));
 
 
-
             this.PasswordLabel.Click += new EventHandler(PasswordLabelClick);
-
         }
-
 
 
         private void PasswordLabelClick(object sender, EventArgs e)
         {
+            string text = this.PasswordLabel.Text;
 
-            MessageBox.Show("クリップボードにコピーしました。");
-            Clipboard.SetText(this.PasswordLabel.Text);
+
+            if (text != "")
+            {
+                try
+                {
+                    Clipboard.Clear();
+                    Clipboard.SetData(DataFormats.Text, text);
+                    MessageBox.Show("クリップボードにコピーしました。");
+                }
+                catch (ExternalException ex)
+                {
+                    MessageBox.Show("クリップボードのコピーに失敗しました。");
+                }
+            }
         }
-
 
 
         private void radioButton_CheckedChanged(object sender, EventArgs e)
