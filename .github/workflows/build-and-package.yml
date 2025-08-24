@@ -1,0 +1,46 @@
+name: Build and Package PasswordGenerator
+
+on:
+  push:
+    branches: [ master, main ]
+  pull_request:
+    branches: [ master, main ]
+  workflow_dispatch:
+  release:
+    types: [published]
+
+jobs:
+  build:
+    runs-on: windows-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Setup MSBuild
+      uses: microsoft/setup-msbuild@v2
+      
+    - name: Setup NuGet
+      uses: NuGet/setup-nuget@v2
+      
+    - name: Restore NuGet packages
+      run: nuget restore PasswordGenerator.sln
+      
+    - name: Build solution
+      run: msbuild PasswordGenerator.sln /p:Configuration=Release /p:Platform="Any CPU"
+      
+    - name: Create package directory
+      run: mkdir package
+      
+    - name: Copy executable and dependencies
+      run: |
+        copy "PasswordGenerator.Forms\bin\Release\PasswordGenerator.Forms.exe" package\
+        copy "PasswordGenerator.Forms\bin\Release\PasswordGenerator.Forms.exe.config" package\
+        copy "PasswordGenerator.Forms\bin\Release\PasswordGenerator.Domain.dll" package\
+      
+    - name: Upload build artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: PasswordGenerator-${{ github.sha }}
+        path: package/
+        retention-days: 30
