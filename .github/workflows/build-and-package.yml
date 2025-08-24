@@ -38,14 +38,9 @@ jobs:
         copy "PasswordGenerator.Forms\bin\Release\PasswordGenerator.Forms.exe.config" package\
         copy "PasswordGenerator.Forms\bin\Release\PasswordGenerator.Domain.dll" package\
       
-    - name: Create zip package
-      run: |
-        cd package
-        7z a ..\PasswordGenerator-${{ github.sha }}.zip *
-      
     - name: Upload build artifact
       uses: actions/upload-artifact@v4
       with:
         name: PasswordGenerator-${{ github.sha }}
-        path: PasswordGenerator-${{ github.sha }}.zip
+        path: package/
         retention-days: 30
