@@ -96,7 +96,7 @@ namespace PasswordGenerator.Domain.Helpers
 
         public static char GetRandomChar(string chars)
         {
-            int num = random.Next(0, chars.Length - 1);
+            int num = random.Next(0, chars.Length);
             return chars[num];
         }
     }
